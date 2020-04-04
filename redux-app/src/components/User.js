@@ -13,26 +13,22 @@ class User extends Component {
     }
 
     changeEmail(e) {
-        this.props.changeName(e.target.value || "ramon.w.rocha@gmail.com");
+        this.props.changeEmail(e.target.value || "ramon.w.rocha@gmail.com");
     }
 
     render() {
         return (
-            <div>
-                <h1>Hola {this.props.myname}</h1>
-                <h2>{this.props.myemail}</h2>
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="input-group">
-                            <input onChange={this.changeName} />
-                            <button className="btn btn-primary" onClick={() => { this.props.changeName("Ramon") }} >Nome por defecto</button>
-                        </div>
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="input-group">
+                        <input onChange={this.changeName} className="form-control" />
+                        <button className="btn btn-primary" onClick={() => { this.props.changeName("Ramon") }} >Nome por defecto</button>
                     </div>
-                    <div className="col-md-6">
-                        <div className="input-group">
-                            <input onChange={this.changeEmail} />
-                            <button className="btn btn-primary" onClick={() => { this.props.changeEmail("ramon.w.rocha@gmail.com") }} >Email por defecto</button>
-                        </div>
+                </div>
+                <div className="col-md-6">
+                    <div className="input-group">
+                        <input onChange={this.changeEmail} className="form-control" />
+                        <button className="btn btn-primary" onClick={() => { this.props.changeEmail("ramon.w.rocha@gmail.com") }} >Email por defecto</button>
                     </div>
                 </div>
             </div>

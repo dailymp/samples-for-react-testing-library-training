@@ -11,6 +11,13 @@ const reducer = (state = defectoState, action) => {
         }
     }
 
+    if (action.type === "CHANGE_EMAIL") {
+        return {
+            ...state,
+            email: action.payload
+        }
+    }
+
     return state;
 }
 
