@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getAPI } from '../actions/Action';
 
 class User extends Component {
     constructor(props) {
@@ -16,19 +17,27 @@ class User extends Component {
         this.props.changeEmail(e.target.value || "ramon.w.rocha@gmail.com");
     }
 
+    changeList(arr) {
+        this.props.changeList(arr);
+    }
+
+    componentDidMount() {
+        getAPI().then(item => this.changeList(item));
+    }
+
     render() {
         return (
             <div className="row">
                 <div className="col-md-6">
                     <div className="input-group">
-                        <input onChange={this.changeName} className="form-control" />
-                        <button className="btn btn-primary" onClick={() => { this.props.changeName("Ramon") }} >Nome por defecto</button>
+                        <input onChange={this.changeName} ref="name" className="form-control" />
+                        <button className="btn btn-primary" onClick={() => { this.props.changeName("Ramon"); this.refs.name.value = '' }} >Reset</button>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="input-group">
-                        <input onChange={this.changeEmail} className="form-control" />
-                        <button className="btn btn-primary" onClick={() => { this.props.changeEmail("ramon.w.rocha@gmail.com") }} >Email por defecto</button>
+                        <input onChange={this.changeEmail} ref="email" className="form-control" />
+                        <button className="btn btn-primary" onClick={() => { this.props.changeEmail("ramon.w.rocha@gmail.com"); this.refs.email.value = '' }} >Reset</button>
                     </div>
                 </div>
             </div>
@@ -36,28 +45,37 @@ class User extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        myname: state.nombre,
-        myemail: state.email
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         myname: state.nombre,
+//         myemail: state.email
+//     }
+// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changeName: (nombre) => {
             dispatch({
                 type: "CHANGE_NAME",
-                payload: nombre
+                payload: nombre,
+                key: 'nombre'
             })
         },
         changeEmail: (email) => {
             dispatch({
                 type: "CHANGE_EMAIL",
-                payload: email
+                payload: email,
+                key: 'email'
             })
-        }
+        },
+        changeList: (list) => {
+            dispatch({
+                type: "CHANGE_LIST",
+                payload: list,
+                key: 'lista'
+            })
+        },
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(null, mapDispatchToProps)(User);

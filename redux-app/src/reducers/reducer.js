@@ -1,24 +1,33 @@
 const defectoState = {
     nombre: "Ramon",
-    email: 'ramon.w.rocha@gmail.com'
+    email: 'ramon.w.rocha@gmail.com',
+    lista: []
 }
 
 const reducer = (state = defectoState, action) => {
-    if (action.type === "CHANGE_NAME") {
-        return {
-            ...state,
-            nombre: action.payload
-        }
+
+    debugger;
+    if (action.type === "@@INIT") {
+        return state;
     }
 
-    if (action.type === "CHANGE_EMAIL") {
-        return {
-            ...state,
-            email: action.payload
-        }
+    return {
+        ...state,
+        [action.key]: action.payload
     }
 
-    return state;
+    // if (action.type === "CHANGE_EMAIL") {
+    //     return {
+    //         ...state,
+    //         email: action.payload
+    //     }
+    // }
+
+    // if (action.type === "CHANGE_LIST") {
+    //     return {
+    //         lista: action.payload
+    //     }
+    // }
 }
 
 export default reducer;
