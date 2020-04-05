@@ -3,7 +3,6 @@ import './App.css';
 import User from './components/User';
 import { useSelector } from "react-redux";
 import Table from './components/Table';
-import ProductForm from './components/ProductForm';
 
 export default function App() {
   const store = useSelector(state => state);
@@ -18,10 +17,6 @@ export default function App() {
               <h2>Hola {store.nombre}</h2>
               <h2>{store.email}</h2>
               <User />
-            </div>
-            <hr></hr>
-            <div className="col-md-12">
-              <ProductForm></ProductForm>
             </div>
           </div>
         </div>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Modal, Row, Col, Form, Button } from 'react-bootstrap'
-import { putAPI, getAPI } from '../actions/Action';
+import { postAPI, getAPI } from '../actions/Action';
 import { connect } from 'react-redux';
 
-class ModalEdit extends Component {
+class ModalAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -11,17 +11,16 @@ class ModalEdit extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
 
-        let model = {
-            id: event.target.id.value,
-            descricao: event.target.descricao.value,
-            quantidade: event.target.quantidade.value,
-            valor: event.target.valor.value
-        };
-
-        putAPI(model).then(item => {
+        postAPI(this.state).then(item => {
             this.loadList();
         });
     }
@@ -49,49 +48,41 @@ class ModalEdit extends Component {
                     <div className="container">
                         <Form onSubmit={this.handleSubmit}>
                             <Row>
-                                <Col md="3">
-                                    <Form.Group controlId="id">
-                                        <Form.Label>ID</Form.Label>
-                                        <Form.Control name="id"
-                                            type="text" required disabled
-                                            defaultValue={this.props.id}>
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
 
-                                <Col md="9">
+                                <Col md="6">
                                     <Form.Group controlId="descricao">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control name="descricao"
-                                            type="text" required
-                                            defaultValue={this.props.descricao}>
+                                            onChange={this.handleChange}
+                                            type="text" required>
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
 
-                                <Col md="6">
+                                <Col md="3">
                                     <Form.Group controlId="quantidade">
                                         <Form.Label>Quantity</Form.Label>
                                         <Form.Control name="quantidade"
-                                            type="number" required
-                                            defaultValue={this.props.quantidade}>
+                                            onChange={this.handleChange}
+                                            type="number" required>
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
 
-                                <Col md="6">
+                                <Col md="3">
                                     <Form.Group controlId="valor">
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control name="valor"
-                                            type="number" required
-                                            defaultValue={this.props.valor}>
+                                            onChange={this.handleChange}
+                                            type="number" required>
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
+
                             </Row>
 
                             <Form.Group>
-                                <Button variant="success" type="submit">Save</Button>
+                                <Button disabled={!this.state.valor || !this.state.descricao || !this.state.quantidade} variant="success" type="submit">Save</Button>
                             </Form.Group>
 
                         </Form>
@@ -117,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ModalEdit);
+export default connect(null, mapDispatchToProps)(ModalAdd);

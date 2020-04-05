@@ -18,7 +18,7 @@ class User extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <div className="row">
                     <div className="col-md-6">
                         <div className="input-group">
@@ -33,22 +33,10 @@ class User extends Component {
                         </div>
                     </div>
                 </div>
-                <hr></hr>
-                <h2>CRUD - PRODUTOS</h2>
-                <div className="row">
-                    <div className="col-md-6"></div>
-                </div>
-            </div>
+            </>
         );
     }
 }
-
-// const mapStateToProps = (state) => {
-//     return {
-//         myname: state.nombre,
-//         myemail: state.email
-//     }
-// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
