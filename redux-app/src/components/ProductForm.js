@@ -17,18 +17,22 @@ class ProductForm extends Component {
     changeHandler = (event) => {
         let nam = event.target.name;
         let val = event.target.value;
-        this.props.model[nam] = val;
-        this.setState({ [nam]: val });
+        this.props.form[nam] = val;
+        //this.setState({ [nam]: val });
     }
 
     submitHandler = (event) => {
         event.preventDefault();
-        
-        if (!this.props.model.id) {
-            this.addProduct();
-        } else {
-            this.update();
-        }
+
+        postAPI(event.target).then(item => {
+            this.clearForm();
+        })
+
+        // if (!this.props.form.id) {
+        //     this.addProduct();
+        // } else {
+        //     this.update();
+        // }
 
     }
 
@@ -39,7 +43,7 @@ class ProductForm extends Component {
     }
 
     update() {
-        putAPI(this.props.model).then(item => {
+        putAPI(this.props.form).then(item => {
             this.clearForm();
         });
     }
@@ -69,39 +73,43 @@ class ProductForm extends Component {
                     type='number'
                     name='id'
                     onChange={this.changeHandler}
-                    value={this.props.model.id}
+                    value={this.props.form.id}
                 />
                 <input
                     type='text'
                     name='descricao'
                     onChange={this.changeHandler}
-                    value={this.props.model.descricao}
+                    value={this.props.form.descricao}
                 />
                 <label>Quantity</label>
                 <input
                     type='number'
                     name='quantidade'
                     onChange={this.changeHandler}
-                    value={this.props.model.quantidade}
+                    value={this.props.form.quantidade}
                 />
                 <label>Price</label>
                 <input
                     type='number'
                     name='valor'
                     onChange={this.changeHandler}
-                    value={this.props.model.valor}
+                    value={this.props.form.valor}
                 />
-                <button
-                    type='submit'
-                    disabled={!this.props.model.descricao || !this.props.model.quantidade || !this.props.model.valor}
-                    className="btn btn-success">Save</button>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button
+                        type='submit'
+                        disabled={!this.state.descricao || !this.state.quantidade || !this.state.valor}
+                        className="btn btn-success">Save</button>
+                    <button type="button" className="btn btn-success" onClick={() => { this.clearForm() }}>NEW</button>
+                </div>
+
             </form>);
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        model: state.model
+        form: state.model
     }
 }
 
