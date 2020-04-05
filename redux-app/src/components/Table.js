@@ -63,7 +63,7 @@ class Table extends Component {
                                     <td>{item.valor}</td>
                                     <td>
                                         <ButtonToolbar>
-                                            <Button variant="success" onClick={() => this.setState({ descricao: item.descricao, valor: item.valor, id: item.id, quantidade: item.quantidade, openModal: true })}>
+                                            <Button variant="success" onClick={() => this.setState({ descricao: item.descricao, valor: item.valor, id: item.id, quantidade: item.quantidade, openModalEdit: true })}>
                                                 Edit
                                         </Button>
                                             <Button variant="danger" onClick={() => { this.delete(item.id) }}>Delete</Button>
