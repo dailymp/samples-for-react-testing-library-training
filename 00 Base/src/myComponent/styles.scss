@@ -1,0 +1,21 @@
+.container {
+  text-align: center;
+  .chip-container {
+    display: block;
+    position: relative;
+    margin-top: 25px;
+    .MuiChip-root {
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  }
+  .input-component {
+    .MuiFormControl-root {
+      margin-top: 10px;
+    }
+    .MuiSvgIcon-root {
+      margin-top: 35px;
+      color: #00ff00;
+    }
+  }
+}

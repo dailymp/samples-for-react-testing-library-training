@@ -1,4 +1,4 @@
-import { GET_ALL_FRUITS } from './../constants';
+import { GET_ALL_FRUITS, DELETE_FRUIT, ADD_FRUIT } from './../constants';
 const initialState = {
   fruitList: [],
 };
@@ -8,6 +8,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         fruitList: action.payload,
+      };
+    }
+    case DELETE_FRUIT: {
+      return {
+        ...state,
+        fruitList: state.fruitList.filter((e) => e !== action.payload),
+      };
+    }
+    case ADD_FRUIT: {
+      return {
+        ...state,
+        fruitList: state.fruitList.concat([action.payload]),
       };
     }
     default: {
