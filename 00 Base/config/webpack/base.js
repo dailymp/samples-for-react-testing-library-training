@@ -8,7 +8,7 @@ module.exports = merge(
   {
     context: helpers.resolveFromRootPath('src'),
     resolve: {
-      extensions: ['.js', '.ts', '.tsx'],
+      extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
     },
     entry: {
       app: ['./index.tsx'],
@@ -24,6 +24,21 @@ module.exports = merge(
             useCache: true,
             babelCore: '@babel/core',
           },
+        },
+        {
+          test: /\.css$/,
+          loaders: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          loaders: [
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
         },
       ],
     },
