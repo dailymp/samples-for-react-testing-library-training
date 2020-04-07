@@ -5,13 +5,13 @@ import {
   fetchfruits,
   deleteFruit,
   addFruit,
-} from './../redux/actions/fruitsActions';
+} from './../../redux/actions/fruitsActions';
 import './styles.scss';
 
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
-import { MyInputComponent } from './myInputComponent';
+import { MyInputComponent } from '../myInputComponent/myInputComponent';
 export interface Props {
   nameFromProps: string;
 }

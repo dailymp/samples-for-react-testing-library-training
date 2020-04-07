@@ -1,6 +1,7 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Add } from '@material-ui/icons';
+import './styles.scss';
 
 export interface Props {
   addFruit: Function;

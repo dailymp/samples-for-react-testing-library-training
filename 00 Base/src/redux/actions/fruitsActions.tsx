@@ -1,10 +1,10 @@
 import { GET_ALL_FRUITS, DELETE_FRUIT, ADD_FRUIT } from './../constants';
 import { getListOfFruit } from '../../myApi/index';
 
-export const getAllFruits = (res) => {
+export const getAllFruits = (fruits: String[]) => {
   return {
     type: GET_ALL_FRUITS,
-    payload: res,
+    payload: fruits,
   };
 };
 export const fetchfruits = () => {
@@ -13,14 +13,14 @@ export const fetchfruits = () => {
   };
 };
 
-export const deleteFruit = (name) => {
+export const deleteFruit = (name: string) => {
   return {
     type: DELETE_FRUIT,
     payload: name,
   };
 };
 
-export const addFruit = (name) => {
+export const addFruit = (name: string) => {
   return {
     type: ADD_FRUIT,
     payload: name,

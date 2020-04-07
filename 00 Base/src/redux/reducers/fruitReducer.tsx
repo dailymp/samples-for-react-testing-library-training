@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
     case DELETE_FRUIT: {
       return {
         ...state,
-        fruitList: state.fruitList.filter((e) => e !== action.payload),
+        fruitList: state.fruitList.filter((e: string) => e !== action.payload),
       };
     }
     case ADD_FRUIT: {
