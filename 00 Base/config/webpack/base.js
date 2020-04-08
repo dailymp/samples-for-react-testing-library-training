@@ -8,7 +8,7 @@ module.exports = merge(
   {
     context: helpers.resolveFromRootPath('src'),
     resolve: {
-      extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
+      extensions: ['.js', '.ts', '.tsx', '.css', '.scss', '.less'],
     },
     entry: {
       app: ['./index.tsx'],
@@ -27,18 +27,15 @@ module.exports = merge(
         },
         {
           test: /\.css$/,
-          loaders: [
-            'style-loader',
-            'css-loader'
-          ]
+          loaders: ['style-loader', 'css-loader'],
         },
         {
           test: /\.s[ac]ss$/i,
-          loaders: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
-          ],
+          loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        },
+        {
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'less-loader'],
         },
       ],
     },

@@ -5,8 +5,8 @@ import {
   fetchfruits,
   deleteFruit,
   addFruit,
-} from './../../redux/actions/fruitsActions';
-import './styles.scss';
+} from './../../redux/actions/index';
+import './styles.less';
 
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
@@ -20,7 +20,6 @@ export const MyComponent: React.FunctionComponent<Props> = (props) => {
   const { nameFromProps } = props;
   const dispatch = useDispatch();
   const fruitList = useSelector((state) => state.fruits.fruitList);
-  console.log('fruitList', fruitList);
 
   return (
     <>
