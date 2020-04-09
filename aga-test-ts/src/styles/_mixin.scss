@@ -1,0 +1,18 @@
+@mixin btn {
+  font-family: "Varela Round", sans-serif;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  outline: none;
+}
+
+@mixin input {
+  background-color: #efefef;
+  color: #666;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+}
