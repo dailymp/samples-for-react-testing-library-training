@@ -9,7 +9,7 @@ export const MyAddContact: FC<Props> = ({ onAdd }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  // Initial id is an epty string which is gonna be change when api is called
+  // Initial id is an empty string which is gonna be change when api is called
   const handleAdd = () => {
     const contact = { id: '', name: name, email: email };
     onAdd(contact);

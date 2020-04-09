@@ -7,7 +7,7 @@ import {
   act,
   RenderResult,
 } from '@testing-library/react';
-import * as myFruitApi from '../myApi/myFruitApi';
+import * as myContactApi from '../myApi/myContactApi';
 import { MyComponent } from './myComponent';
 
 jest.mock('./myFruits.tsx', () => ({
@@ -83,8 +83,7 @@ describe('My component', () => {
   xit('should display the list of fruits after resolving the api call on initialization', async () => {
     // Arrange
     const getListOfFruitMock = jest
-      .spyOn(myFruitApi, 'getListOfFruit')
-      .mockResolvedValue(['Melon', 'Apple', 'Pear']);
+      .spyOn(myContactApi, 'getContactList')
 
     // Act
     let wrapper: RenderResult = null;
