@@ -1,31 +1,37 @@
 import * as React from 'react';
 // import { render, cleanup } from '@testing-library/react';
-import { render, fireEvent, waitForElement, act, RenderResult } from '@testing-library/react';
-import * as myApi from '../myApi';
-import { MyComponent, Props } from './myComponent';
+import {
+  render,
+  fireEvent,
+  waitForElement,
+  act,
+  RenderResult,
+} from '@testing-library/react';
+import * as myFruitApi from '../myApi/myFruitApi';
+import { MyComponent } from './myComponent';
 
 jest.mock('./myFruits.tsx', () => ({
   MyFruits: () => <div />,
 }));
 
-const baseProps: Props = {
-  nameFromProps: null,
-}
+// const baseProps: Props = {
+//   nameFromProps: null,
+// }
 
 //afterEach(cleanup);
 
 describe('My component', () => {
-  let props: Props;
-  beforeEach(() => {
-    props = {...baseProps};
-  });
+  // let props: Props;
+  // beforeEach(() => {
+  //   props = {...baseProps};
+  // });
 
   it('should display the title provided', () => {
     // Arrange
     const name = 'Title';
 
     // Act
-    const { getByText } = render(<MyComponent nameFromProps={name} />);
+    const { getByText } = render(<MyComponent />);
 
     // Assert
     const element = getByText('Hello Title!');
@@ -48,7 +54,7 @@ describe('My component', () => {
     // Arrange
 
     // Act
-    const { getByTestId, getAllByText } = render(<MyComponent {...props} />);
+    const { getByTestId, getAllByText } = render(<MyComponent/>);
     // const xxlabelElement = getByText(''); // https://testing-library.com/docs/dom-testing-library/api-queries
     const elementsWithEmptyText = getAllByText('');
     const labelElement = getByTestId('userName-label');
@@ -62,7 +68,7 @@ describe('My component', () => {
   it('should update username label when the input changes', () => {
     // Arrange
     // Act
-    const { getByTestId } = render(<MyComponent {...props} />);
+    const { getByTestId } = render(<MyComponent />);
 
     const labelElement = getByTestId('userName-label');
     const inputElement = getByTestId('userName-input') as HTMLInputElement;
@@ -77,15 +83,15 @@ describe('My component', () => {
   xit('should display the list of fruits after resolving the api call on initialization', async () => {
     // Arrange
     const getListOfFruitMock = jest
-      .spyOn(myApi, 'getListOfFruit')
+      .spyOn(myFruitApi, 'getListOfFruit')
       .mockResolvedValue(['Melon', 'Apple', 'Pear']);
 
     // Act
     let wrapper: RenderResult = null;
-    await act(async() => {
-      wrapper = render(<MyComponent {...props} />);
+    await act(async () => {
+      wrapper = render(<MyComponent />);
     });
-    const {getByText} = wrapper;
+    const { getByText } = wrapper;
     await waitForElement(() => getByText('Melon'));
     const melonElement = getByText('Melon');
     const appleElement = getByText('Apple');

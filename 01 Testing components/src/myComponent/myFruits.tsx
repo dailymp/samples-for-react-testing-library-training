@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { getListOfFruit }  from '../myApi';
+import React, { useEffect} from 'react';
+import { getListOfFruit } from '../myApi/myFruitApi';
 
-export const MyFruits = (props) => {
+export const MyFruits = () => {
   const [fruits, setFruits] = React.useState([]);
-  React.useEffect(() => {
+  useEffect(() => {
     getListOfFruit().then(setFruits);
   }, []);
 
@@ -11,8 +11,10 @@ export const MyFruits = (props) => {
     <>
       <h4>Fruits gallore</h4>
       {fruits.map((fruit, index) => (
-        <li key={index} data-testid={fruit}>{fruit}</li>
+        <li key={index} data-testid={fruit}>
+          {fruit}
+        </li>
       ))}
     </>
-  )
-}
+  );
+};
