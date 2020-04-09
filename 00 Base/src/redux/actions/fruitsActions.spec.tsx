@@ -19,9 +19,9 @@ describe('actions', () => {
     };
     expect(deleteFruit(fruit)).toEqual(expectedAction);
   });
-  
-  it('should create an action to fetch', () => {
-    const fruit = ['grape','banana'];
+
+  it('should create an action to get all fruits', () => {
+    const fruit = ['grape', 'banana'];
     const expectedAction = {
       type: GET_ALL_FRUITS,
       payload: fruit,
