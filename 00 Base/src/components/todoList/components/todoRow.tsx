@@ -3,11 +3,11 @@ import {TodoEntity} from '../../../model/todo';
 
 interface Props  {
   todo: TodoEntity;
+  deleteTodo: (id: number) => void
 }
 
-const onDeleteSubmit = () => console.log('Delete todo')
-
 export const TodoRowComponent = (props: Props) => {
+  const { deleteTodo } = props
   const { id, title, completed } = props.todo
    return (
      <tr>
@@ -21,7 +21,7 @@ export const TodoRowComponent = (props: Props) => {
         <span>{completed ? 'Completed' : 'Pending'}</span>
        </td>
        <td>
-       <button data-testid="deleteTodo-button"  onClick={() => onDeleteSubmit()}>Delete</button>
+       <button data-testid="deleteTodo-button"  onClick={() => deleteTodo(id)}>Delete</button>
        </td>
      </tr>
    );

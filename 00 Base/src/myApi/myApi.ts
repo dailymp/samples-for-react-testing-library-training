@@ -7,8 +7,14 @@ export const getListOfTodos = (): Promise<TodoEntity[]> => {
     .catch(handleError);
 }
 
-export const insertTodo = (todo: string): Promise<TodoEntity[]> => {
-  return BEApi.insertTodo(todo)
+export const addToTodoList = (todo: string): Promise<TodoEntity[]> => {
+  return BEApi.addToTodoList(todo)
+    .then(resolveTodos)
+    .catch(handleError);
+}
+
+export const deleteFromTodoList = (id: number): Promise<TodoEntity[]> => {
+  return BEApi.deleteFromTodoList(id)
     .then(resolveTodos)
     .catch(handleError);
 }

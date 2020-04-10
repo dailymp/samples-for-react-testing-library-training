@@ -6,18 +6,14 @@ export type todoState =  TodoEntity[];
 export const todoReducer =  (state : todoState = [], action) => {
   switch (action.type) {
     case actionsEnums.TODO_REQUEST_COMPLETED:
-      return handleGetTodosActionCompleted(state, action.payload);
     case actionsEnums.ADD_REQUEST_COMPLETED:
-      return handleAddTodoActionCompleted(state, action.payload);
+    case actionsEnums.DELETE_REQUEST_COMPLETED:
+      return handleActionCompleted(state, action.payload);
   }
 
   return state;
 };
 
-const handleGetTodosActionCompleted = (state : todoState, todos) => {
+const handleActionCompleted = (state : todoState, todos) => {
   return todos;
-}
-
-const handleAddTodoActionCompleted = (state : todoState, todo) => {
-  return todo;
 }

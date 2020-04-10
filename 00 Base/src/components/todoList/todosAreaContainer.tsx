@@ -12,7 +12,7 @@ const mapStateToProps = (state: State) => {
 const mapDispatchToProps = dispatch => {
   return {
     loadTodos: () => {return dispatch(getTodos())},
-    addTodo: (newTodo: string) => {return dispatch(addTodo(newTodo))}
+    addTodo: (newTodo: string) => {return dispatch(addTodo(newTodo))},
   };
 }
 

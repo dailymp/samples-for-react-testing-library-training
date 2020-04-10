@@ -31,10 +31,6 @@ export class TodoAreaComponent extends React.Component<Props, State> {
     const { todos } = this.props
     const { newTodo } = this.state
 
-    if(todos && todos.length === 0) {
-      return <p>Cargando datos...</p>
-    }
-
     return (
       <>
         <>
@@ -42,7 +38,9 @@ export class TodoAreaComponent extends React.Component<Props, State> {
             <input data-testid="todo-input" type="text" name="title" value={newTodo} onChange={event => this.setState({ newTodo: event.target.value })} />
             <button data-testid="addTodo-button" onClick={() => this.onAddSubmit()} disabled={!newTodo}>Add todo</button>
         </>
-        <TodoTableComponent todos={todos}/>
+        {todos && todos.length > 0 ? 
+          <TodoTableComponent todos={todos} /> :
+          <p>No todos yet</p>}
       </>
     )
   }
