@@ -1,15 +1,20 @@
 import * as BEApi from './myBackEndApiEndpoint';
+import { TodoEntity } from '../model/todo';
 
-export const getListOfFruit = (): Promise<string[]> => {
-  return BEApi.getFruits('http://fruityfruit.com')
-    .then(resolveFruits)
+export const getListOfTodos = (): Promise<TodoEntity[]> => {
+  return BEApi.getTodos()
+    .then(resolveTodos)
     .catch(handleError);
 }
 
-const resolveFruits = (fruits: string[]) => {
-  return fruits;
+export const insertTodo = (todo: string): Promise<TodoEntity[]> => {
+  return BEApi.insertTodo(todo)
+    .then(resolveTodos)
+    .catch(handleError);
 }
 
+const resolveTodos = (todos: TodoEntity[]): TodoEntity[] => todos
+
 const handleError = () => {
-  throw new Error('Where is my fruit???');
+  throw new Error('Where is my todos???');
 }

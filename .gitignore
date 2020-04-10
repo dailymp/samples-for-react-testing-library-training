@@ -10,5 +10,5 @@ src/api/apiUtils.ts
 *.iml
 junit.xml
 /reports/
-/.awcache
+.awcache
 /.vscode

@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const merge = require('webpack-merge');
 const helpers = require('./helpers');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(
   {},
@@ -11,7 +12,9 @@ module.exports = merge(
       extensions: ['.js', '.ts', '.tsx'],
     },
     entry: {
-      app: ['./index.tsx'],
+      app: ['./index.tsx',
+        './content/styles.css',
+      ],
     },
     module: {
       rules: [
@@ -24,6 +27,10 @@ module.exports = merge(
             useCache: true,
             babelCore: '@babel/core',
           },
+        },
+        {
+          test: /\.css$/,        
+          use: [MiniCssExtractPlugin.loader, "css-loader"]
         },
       ],
     },
@@ -45,6 +52,10 @@ module.exports = merge(
         template: 'index.html',
       }),
       new CheckerPlugin(),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+      }),
     ],
   }
 );
