@@ -2,9 +2,12 @@ import * as React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  fetchfruits,
+  /*   fetchfruits,
   deleteFruit,
-  addFruit,
+  addFruit, */
+  fetchPosts,
+  deletePost,
+  addPost,
 } from './../../redux/actions/index';
 import './styles.less';
 
@@ -19,7 +22,7 @@ export interface Props {
 export const MyComponent: React.FunctionComponent<Props> = (props) => {
   const { nameFromProps } = props;
   const dispatch = useDispatch();
-  const fruitList = useSelector((state) => state.fruits.fruitList);
+  const posts = useSelector((state) => state.posts.posts);
 
   return (
     <>
@@ -28,25 +31,23 @@ export const MyComponent: React.FunctionComponent<Props> = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => dispatch(fetchfruits())}
+          onClick={() => dispatch(fetchPosts())}
         >
-          Get some fruits!
+          Get post from API
         </Button>
         <div className="chip-container">
-          {!!fruitList
-            ? fruitList.map((el: string) => (
+          {!!posts
+            ? posts.map((el /* : Object */) => (
                 <Chip
                   color="primary"
-                  label={el}
-                  key={el}
-                  onDelete={() => dispatch(deleteFruit(el))}
+                  label={el.title}
+                  key={el.id}
+                  onDelete={() => dispatch(deletePost(el.id))}
                 />
               ))
             : null}
         </div>
-        <MyInputComponent
-          addFruit={(newFruit) => dispatch(addFruit(newFruit))}
-        />
+        <MyInputComponent addPost={(newPost) => dispatch(addPost(newPost))} />
       </div>
     </>
   );

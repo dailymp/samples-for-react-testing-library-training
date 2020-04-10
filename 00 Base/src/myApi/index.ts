@@ -1,1 +1,1 @@
-export { getListOfFruit } from './myApi';
+export { getListOfFruit, getPosts } from './myApi';

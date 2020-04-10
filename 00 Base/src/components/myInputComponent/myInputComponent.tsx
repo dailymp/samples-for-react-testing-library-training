@@ -4,24 +4,24 @@ import { Add } from '@material-ui/icons';
 import './styles.less';
 
 export interface Props {
-  addFruit: Function;
+  addPost: Function;
 }
 
 export const MyInputComponent: React.FunctionComponent<Props> = (props) => {
-  const { addFruit } = props;
+  const { addPost } = props;
   const [name, setName] = React.useState('');
 
   return (
     <div className="input-component">
       <TextField
-        label="Add fruit"
+        label="Add post"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       {!!name ? (
         <Add
           onClick={() => {
-            addFruit(name);
+            addPost(name);
             setName('');
           }}
         />

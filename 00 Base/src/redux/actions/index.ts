@@ -4,3 +4,4 @@ export {
   fetchfruits,
   getAllFruits,
 } from './fruitsActions';
+export { fetchPosts, deletePost,addPost } from './postActions';
