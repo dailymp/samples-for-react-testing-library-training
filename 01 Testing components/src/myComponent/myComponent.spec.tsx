@@ -9,37 +9,39 @@ import {
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { MyComponent } from './myComponent';
-import {
-  loadAllContacts,
-  contactUpdate,
-  contactCreate,
-  contactDelete,
-} from '../store/contact/actions';
-import {
-  getContactList,
-  deleteContact,
-  addContact,
-  updateContact,
-} from '../myApi';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import axios from 'axios';
-import { rootReducer } from '../store/contact';
-import { App } from '../app';
+import configureStore from 'redux-mock-store';
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('react-redux', () => ({
   useDispatch: () => {},
-  useSelector: () => ({
-    contacts: { id: '', name: '', email: '' },
-  }),
+  useSelector: () => [{ id: '1', name: 'a', email: '' }],
 }));
+
+const setUp = (initialState = {}) => {
+  const store = configureStore(initialState);
+  const wrapper = shallow(<MyComponent store={store} />)
+    .childAt(0)
+    .dive();
+  return wrapper;
+};
+
 describe('<MyComponent />', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    const initialState = [{ id: '1', name: 'a', email: '' }];
+    wrapper = setUp(initialState);
+  });
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    const wrapper = shallow(<MyComponent />);
-    expect(wrapper).not.toBeNull();
+    expect(wrapper.length).not.toBeNull();
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Renders table list', () => {
+    const label = wrapper.find('[data-test="app-label"]');
+    expect(label).not.toBeNull();
   });
 });

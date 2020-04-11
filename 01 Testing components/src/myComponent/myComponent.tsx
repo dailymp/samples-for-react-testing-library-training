@@ -1,7 +1,7 @@
-import React, { useState, useEffect, FC } from 'react';
-import { Dispatch } from 'redux';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, FC } from 'react';
 
+
+import { useSelector, useDispatch } from '../utils/react-redux-hooks';
 import {
   getContactList,
   deleteContact,
@@ -23,13 +23,13 @@ import { RootState } from '../store/contact/index';
 
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
-  const dispatch = useDispatch<Dispatch<ContactActionTypes>>();
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   // useEffect loads all contacts.
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     getContactList()
       .then((u) => dispatch(loadAllContacts(u.data)))
@@ -67,16 +67,16 @@ export const MyComponent: FC<any> = () => {
   };
 
   return (
-    <div className="container" data-test="app">
+    <div className="container" data-testid="app">
       <MyLoading hidden={!loading}>
         <h1 className="container-title" data-testid="component-label">
           My Contacts
         </h1>
-        <div className="table-responsive">
+        <div className="table-responsive" >
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">Full Name</th>
+                <th scope="col" data-test="app-label" >Full Name</th>
                 <th scope="col">Email</th>
               </tr>
             </thead>
