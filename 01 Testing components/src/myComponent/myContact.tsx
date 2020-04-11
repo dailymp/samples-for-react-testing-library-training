@@ -1,5 +1,5 @@
-import React, { useState, FC } from "react";
-import { Contact as ContactType } from "../store/contact/types";
+import React, { useState, FC } from 'react';
+import { Contact as ContactType } from '../store/contact/types';
 
 export interface Props {
   contact: ContactType;
@@ -9,7 +9,7 @@ export interface Props {
 
 export const MyContact: FC<Props> = ({ contact, onDelete, onChange }) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const handleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ export const MyContact: FC<Props> = ({ contact, onDelete, onChange }) => {
   };
 
   // Edit form let change email.
-  // By default edit form is hidden. 
+  // By default edit form is hidden.
   // It appers when "change email" button is clicked.
   let editForm;
   if (showEdit === true) {
@@ -43,6 +43,7 @@ export const MyContact: FC<Props> = ({ contact, onDelete, onChange }) => {
       <React.Fragment>
         <td>
           <input
+            data-testid="contact-input-change"
             className="contact-row__input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -50,6 +51,7 @@ export const MyContact: FC<Props> = ({ contact, onDelete, onChange }) => {
         </td>
         <td>
           <button
+            data-testid="contact-button-save"
             className="contact-row__btn"
             type="submit"
             onClick={(e) => handleSave(e, contact)}
@@ -63,16 +65,21 @@ export const MyContact: FC<Props> = ({ contact, onDelete, onChange }) => {
   return (
     <React.Fragment>
       <tr>
-        <td>{contact.name}</td>
-        <td>{contact.email}</td>
+        <td data-testid="contact-label-name">{contact.name}</td>
+        <td data-testid="contact-label-email">{contact.email}</td>
         <td>
-          <button className="contact-row__btn" onClick={handleChange}>
+          <button
+            className="contact-row__btn"
+            data-testid="contact-button-change"
+            onClick={handleChange}
+          >
             CHANGE EMAIL
           </button>
         </td>
         <td>
           <button
             className="contact-row__btn delete"
+            data-testid="contact-button-delete"
             onClick={(e) => handleDelete(e, contact)}
           >
             DELETE

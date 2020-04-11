@@ -1,4 +1,3 @@
-export { getListOfFruit } from './myFruitApi';
 export {
   getContactList,
   updateContact,

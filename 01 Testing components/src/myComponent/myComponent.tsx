@@ -21,9 +21,10 @@ import {
 } from "../store/contact/types";
 import { RootState } from "../store/contact/index";
 
-export const MyComponent: FC = () => {
-  const dispatch = useDispatch<Dispatch<ContactActionTypes>>();
+export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
+  const dispatch = useDispatch<Dispatch<ContactActionTypes>>();
+
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -67,9 +68,9 @@ export const MyComponent: FC = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" data-test="app" >
       <MyLoading hidden={!loading}>
-        <h1 className="container-title">My Contacts</h1>
+        <h1 className="container-title" data-testid="component-label">My Contacts</h1>
         <div className="table-responsive">
           <table className="table">
             <thead>

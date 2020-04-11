@@ -1,24 +1,24 @@
 import {
   Contact,
-  USERS_UPDATE,
-  USER_UPDATE,
-  USER_CREATE,
-  USER_DELETE,
+  CONTACTS_LOAD,
+  CONTACT_UPDATE,
+  CONTACT_CREATE,
+  CONTACTS_DELETE,
   ContactActionTypes,
-} from "./types";
+} from './types';
 
 export function loadAllContacts(contacts: Array<Contact>): ContactActionTypes {
-  return { type: USERS_UPDATE, payload: contacts };
+  return { type: CONTACTS_LOAD, contacts: contacts };
 }
 
 export function contactUpdate(contact: Contact): ContactActionTypes {
-  return { type: USER_UPDATE, payload: { contact } };
+  return { type: CONTACT_UPDATE, contact };
 }
 
 export function contactCreate(contact: Contact): ContactActionTypes {
-  return { type: USER_CREATE, payload: { contact } };
+  return { type: CONTACT_CREATE, contact };
 }
 
 export function contactDelete(contact: Contact): ContactActionTypes {
-  return { type: USER_DELETE, payload: { contact } };
+  return { type: CONTACTS_DELETE, contact };
 }

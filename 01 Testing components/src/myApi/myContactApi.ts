@@ -1,18 +1,18 @@
-import axios from "axios/index";
-import { Contact as ContactType } from "../store/contact/types";
+import axios from 'axios/index';
+import { Contact as ContactType } from '../store/contact/types';
+
+export const url = 'https://jsonplaceholder.typicode.com/users';
 
 // Get all contacts
-export const getContactList = () =>
-  axios.get("https://jsonplaceholder.typicode.com/users");
+export const getContactList = () => axios.get(url);
 
 // Delete contact
 export const deleteContact = (contact: ContactType) =>
-  axios.delete(`https://jsonplaceholder.typicode.com/users/${contact.id}`);
+  axios.delete(`${url}/${contact.id}`);
 
 // Update existing contact
 export const updateContact = (contact: ContactType) =>
-  axios.put(`https://jsonplaceholder.typicode.com/users/${contact.id}`,contact);
+  axios.put(`${url}/${contact.id}`, contact);
 
 // Create new contact
-export const addContact = (contact: ContactType) =>
-  axios.post("https://jsonplaceholder.typicode.com/users", contact);
+export const addContact = (contact: ContactType) => axios.post(url, contact);

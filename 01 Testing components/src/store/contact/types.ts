@@ -4,35 +4,29 @@ export interface Contact {
   readonly email: string;
 }
 
-export const USERS_UPDATE = "USERS_UPDATE";
-export const USER_UPDATE = "USER_UPDATE";
-export const USER_CREATE = "USER_CREATE";
-export const USER_DELETE = "USER_DELETE";
+export const CONTACTS_LOAD = 'CONTACTS_LOAD';
+export const CONTACT_UPDATE = 'CONTACT_UPDATE';
+export const CONTACT_CREATE = 'CONTACT_CREATE';
+export const CONTACTS_DELETE = 'CONTACTS_DELETE';
 
 interface loadAllContactsAction {
-  type: typeof USERS_UPDATE;
-  payload: Array<Contact>;
+  type: typeof CONTACTS_LOAD;
+  contacts: Array<Contact>;
 }
 
 interface contactUpdateAction {
-  type: typeof USER_UPDATE;
-  payload: {
+  type: typeof CONTACT_UPDATE;
     contact: Contact;
-  };
 }
 
 interface contactCreateAction {
-  type: typeof USER_CREATE;
-  payload: {
-    contact: Contact;
-  };
+  type: typeof CONTACT_CREATE;
+  contact: Contact;
 }
 
 interface contactDeleteAction {
-  type: typeof USER_DELETE;
-  payload: {
-    contact: Contact;
-  };
+  type: typeof CONTACTS_DELETE;
+  contact: Contact;
 }
 
 export type ContactActionTypes =
