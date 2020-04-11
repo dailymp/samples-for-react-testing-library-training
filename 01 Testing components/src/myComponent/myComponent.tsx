@@ -1,32 +1,31 @@
-import React, { useState, useEffect, FC } from "react";
-import { Dispatch } from "redux";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect, FC } from 'react';
+import { Dispatch } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   getContactList,
   deleteContact,
   addContact,
   updateContact,
-} from "../myApi";
+} from '../myApi';
 import {
   loadAllContacts,
   contactUpdate,
   contactCreate,
   contactDelete,
-} from "../store/contact/actions";
-import { MyContact, MyAddContact, MyLoading } from "../myComponent";
+} from '../store/contact/actions';
+import { MyContact, MyAddContact, MyLoading } from '../myComponent';
 import {
   ContactActionTypes,
   Contact as ContactType,
-} from "../store/contact/types";
-import { RootState } from "../store/contact/index";
+} from '../store/contact/types';
+import { RootState } from '../store/contact/index';
 
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
   const dispatch = useDispatch<Dispatch<ContactActionTypes>>();
 
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   // useEffect loads all contacts.
@@ -68,9 +67,11 @@ export const MyComponent: FC<any> = () => {
   };
 
   return (
-    <div className="container" data-test="app" >
+    <div className="container" data-test="app">
       <MyLoading hidden={!loading}>
-        <h1 className="container-title" data-testid="component-label">My Contacts</h1>
+        <h1 className="container-title" data-testid="component-label">
+          My Contacts
+        </h1>
         <div className="table-responsive">
           <table className="table">
             <thead>
@@ -80,7 +81,7 @@ export const MyComponent: FC<any> = () => {
               </tr>
             </thead>
             <tbody>
-              {contacts.map((contact: ContactType) => {
+              {contacts.length > 0 ? contacts.map((contact: ContactType) => {
                 return (
                   <MyContact
                     key={contact.id}
@@ -89,7 +90,7 @@ export const MyComponent: FC<any> = () => {
                     contact={contact}
                   />
                 );
-              })}
+              }): <h1>No contacts...</h1>}
             </tbody>
           </table>
         </div>
