@@ -26,4 +26,10 @@ describe('My Loading', () => {
     const labelElement = getByTestId('loading-label');
     expect(labelElement.textContent).toEqual('Loading...');
   });
+  it('if hidden is true show children', () => {
+    const children =<div data-testid="no-loading">Hello</div>
+    const { getByTestId } = render(<MyLoading hidden={true} children={children}/>);
+    const labelElement = getByTestId('no-loading');
+    expect(labelElement.textContent).toEqual("Hello");
+  });
 });

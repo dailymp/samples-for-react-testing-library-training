@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { MyAddContact, Props } from './myAddContact';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 Enzyme.configure({ adapter: new Adapter() });
 
 const baseProps: Props = {

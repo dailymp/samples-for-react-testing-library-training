@@ -1,7 +1,6 @@
 import React, { useState, FC } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-
-import { useSelector, useDispatch } from '../utils/react-redux-hooks';
 import {
   getContactList,
   deleteContact,
@@ -21,6 +20,8 @@ import {
 } from '../store/contact/types';
 import { RootState } from '../store/contact/index';
 
+
+
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const MyComponent: FC<any> = () => {
   const [error, setError] = useState(false);
 
   // useEffect loads all contacts.
-  React.useEffect(() => {
+  React.useEffect(()  => {
     setLoading(true);
     getContactList()
       .then((u) => dispatch(loadAllContacts(u.data)))
@@ -90,7 +91,7 @@ export const MyComponent: FC<any> = () => {
                     contact={contact}
                   />
                 );
-              }): <h1>No contacts...</h1>}
+              }): <h1 data-testid="component-no-contacts">No contacts...</h1>}
             </tbody>
           </table>
         </div>

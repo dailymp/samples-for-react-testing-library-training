@@ -11,11 +11,15 @@ import Adapter from 'enzyme-adapter-react-16';
 import { MyComponent } from './myComponent';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
+import * as myApi from '../myApi';
+
+jest.mock('axios');
+
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('react-redux', () => ({
   useDispatch: () => {},
-  useSelector: () => [{ id: '1', name: 'a', email: '' }],
+  useSelector: () => [{ id: '1', name: 'aga', email: 'aga@op.com' }],
 }));
 
 const setUp = (initialState = {}) => {
@@ -23,14 +27,14 @@ const setUp = (initialState = {}) => {
   const wrapper = shallow(<MyComponent store={store} />)
     .childAt(0)
     .dive();
-  return wrapper;
+  return wrapper as any;
 };
 
 describe('<MyComponent />', () => {
   let wrapper;
-
+  let error: true;
   beforeEach(() => {
-    const initialState = [{ id: '1', name: 'a', email: '' }];
+    const initialState = [];
     wrapper = setUp(initialState);
   });
 
@@ -40,8 +44,33 @@ describe('<MyComponent />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Renders table list', () => {
-    const label = wrapper.find('[data-test="app-label"]');
-    expect(label).not.toBeNull();
+  it('Shows buttons', () => {
+    const { getByTestId } = render(wrapper);
+    const deleteElement = getByTestId(
+      'contact-button-delete'
+    ) as HTMLButtonElement;
+    expect(deleteElement).not.toBeNull();
+
+    const addElement = getByTestId('add-button-add') as HTMLButtonElement;
+    expect(addElement).not.toBeNull();
+
+    const changeElement = getByTestId(
+      'contact-button-change'
+    ) as HTMLButtonElement;
+    expect(changeElement).not.toBeNull();
+  });
+
+  it('Renders loading', () => {
+    const { getByTestId } = render(<MyComponent />);
+    const labelElement = getByTestId('loading-label');
+    expect(labelElement.textContent).toEqual('Loading...');
+  });
+
+  it('Renders contacts list', () => {
+    const { getByTestId } = render(wrapper);
+    const labelElementName = getByTestId('contact-label-name');
+    const labelElementEmail = getByTestId('contact-label-email');
+    expect(labelElementName.textContent).toEqual('aga');
+    expect(labelElementEmail.textContent).toEqual('aga@op.com');
   });
 });
