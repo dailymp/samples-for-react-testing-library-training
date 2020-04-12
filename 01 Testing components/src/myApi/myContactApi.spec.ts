@@ -16,7 +16,7 @@ describe('contact Api', () => {
   });
 
   it('loads all contacts', () => {
-    getContactList().then((u) => expect(u.data).not.toBeNull());
+    getContactList().then((u) => expect(Promise.resolve(u.data)).not.toBeNull());
   });
   it('add contact', () => {
     const contact = {
@@ -24,7 +24,7 @@ describe('contact Api', () => {
       name: 'Ervin Howell',
       email: 'Shanna@melissa.tv',
     };
-    expect(addContact(contact).then((u) => expect(u.data).not.toBeNull()));
+    expect(addContact(contact).then((u) => expect(Promise.resolve(u.data)).not.toBeNull()));
   });
   it('delete contact', () => {
     const contact = {
@@ -32,6 +32,6 @@ describe('contact Api', () => {
       name: 'Ervin Howell',
       email: 'Shanna@melissa.tv',
     };
-    expect(deleteContact(contact).then((u) => expect(u.data).not.toBeNull()));
+    expect(deleteContact(contact).then((u) => expect(Promise.resolve(u.data)).not.toBeNull()));
   });
 });
