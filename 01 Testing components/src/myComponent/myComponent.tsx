@@ -27,8 +27,10 @@ export const MyComponent: FC<any> = () => {
       getContactList()
         .then((u) => dispatch(loadAllContacts(u.data)))
         .catch(() => setError(true))
-        .finally(() => setLoadContacts(false))
-        .finally(() => setLoading(false));
+        .finally(() => {
+          setLoadContacts(false);
+          setLoading(false);
+        });
     }
   }, [loadContacts]);
 
