@@ -23,7 +23,7 @@ module.exports = merge(
             useBabel: true,
             useCache: true,
             babelCore: '@babel/core',
-          },
+          }
         },
         {
           test: /\.css$/,
