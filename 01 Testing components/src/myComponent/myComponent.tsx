@@ -7,12 +7,7 @@ import {
   addContact,
   updateContact,
 } from '../myApi';
-import {
-  loadAllContacts,
-  contactUpdate,
-  contactCreate,
-  contactDelete,
-} from '../store/contact/actions';
+import { loadAllContacts } from '../store/contact/actions';
 import { MyContact, MyAddContact, MyLoading } from '../myComponent';
 import { Contact as ContactType } from '../store/contact/types';
 import { RootState } from '../store/contact/index';
@@ -23,15 +18,19 @@ export const MyComponent: FC<any> = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [loadContacts, setLoadContacts] = useState(true);
 
   // useEffect loads all contacts.
   React.useEffect(() => {
-    setLoading(true);
-    getContactList()
-      .then((u) => dispatch(loadAllContacts(u.data)))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+    if (loadContacts === true) {
+      setLoading(true);
+      getContactList()
+        .then((u) => dispatch(loadAllContacts(u.data)))
+        .catch(() => setError(true))
+        .finally(() => setLoadContacts(false))
+        .finally(() => setLoading(false));
+    }
+  }, [loadContacts]);
 
   // If there is an error display simple message
   if (error === true) {
@@ -41,25 +40,22 @@ export const MyComponent: FC<any> = () => {
   const handleChange = (contact: ContactType) => {
     setLoading(true);
     updateContact(contact)
-      .then((u) => dispatch(contactUpdate(u.data)))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .then(() => setLoadContacts(true))
+      .catch(() => setError(true));
   };
 
   const handleDelete = (contact: ContactType) => {
     setLoading(true);
     deleteContact(contact)
-      .then(() => dispatch(contactDelete(contact)))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .then(() => setLoadContacts(true))
+      .catch(() => setError(true));
   };
 
   const handleAdd = (contact: ContactType) => {
     setLoading(true);
     addContact(contact)
-      .then((u) => dispatch(contactCreate(u.data)))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .then(() => setLoadContacts(true))
+      .catch(() => setError(true));
   };
 
   return (
