@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {TodoEntity} from '../../../model/todo';
-import { TodoRowContainer } from './todoRowContainer';
+import { TodoRow } from './todoRow';
 
 interface Props {
     todos: TodoEntity[];
@@ -14,23 +14,23 @@ export const TodoTableComponent = (props: Props) => {
           <thead>
             <tr>
               <th>
-                Id
+                <span>Id</span>
               </th>
               <th>
-                Title
+              <span>Title</span>
               </th>
               <th>
-                Completed
+              <span>Completed</span>
               </th>
               <th>
-                Action
+                <span>Action</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {
               todos && todos.map((todo: TodoEntity) =>
-                  <TodoRowContainer key={todo.id} todo={todo} />
+                  <TodoRow key={todo.id} todo={todo} />
               )
             }
           </tbody>

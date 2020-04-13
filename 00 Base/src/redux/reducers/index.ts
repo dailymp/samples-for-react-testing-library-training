@@ -1,10 +1,10 @@
 import { combineReducers} from 'redux';
 import { todoReducer, todoState } from './todoReducer';
 
-export interface State {
+export interface TodoState {
   todoReducer : todoState;
 };
 
-export const reducers = combineReducers<State>({
+export const reducers = combineReducers<TodoState>({
   todoReducer,
 });

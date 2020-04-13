@@ -9,7 +9,7 @@ export const completedAction = (todos: TodoEntity[], action) => {
     }
 }
 
-export const getTodos = () => (dispatcher) =>{
+export const getTodos = () => (dispatcher) => {
     const promise = getListOfTodos();
 
     promise.then(

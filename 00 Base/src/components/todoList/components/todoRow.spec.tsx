@@ -1,21 +1,50 @@
-// import * as React from 'react';
-// import { shallow } from 'enzyme';
-// import { TodoRowComponent } from './todoRow';
-// import { TodoEntity } from '../../../model/todo';
+import * as React from 'react';
+import Enzyme,  { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { TodoEntity } from '../../../model/todo';
+import { TodoRowComponent } from './todoRow';
 
-// describe('TodoRowComponent', () => {
-//   it('should render as expected', () => {
-//     const todo: TodoEntity = {
-//         userId: 1,
-//         id: 1,
-//         title: 'Hacer la compra',
-//         completed: true,
-//     }
+Enzyme.configure({ adapter: new Adapter() })
+
+function setup(todo) {
+  const props = {
+    key: '1',
+    todo,
+    deleteTodo: jest.fn(),
+  }
+
+  const enzymeWrapper = shallow(<TodoRowComponent {...props} />)
+
+  return {
+    props,
+    enzymeWrapper
+  }
+}
+
+describe('TodoRow', () => {
+  it('should render self', () => {
+    const todo: TodoEntity = {
+        userId: 1,
+        id: 1,
+        title: 'Hacer la compra',
+        completed: true,
+    }
     
-//     const component = shallow(
-//       <TodoRowComponent todo={todo}/>,
-//     );
+    const { enzymeWrapper } = setup(todo)
 
-//     expect(component).toMatchSnapshot();
-//   });
-// });
+    expect(enzymeWrapper.find('tr')).toHaveLength(1)
+    expect(enzymeWrapper.find('td')).toHaveLength(4)
+    expect(enzymeWrapper.find('span')).toHaveLength(3)
+    expect(enzymeWrapper.find('button').text()).toBe('Delete')
+  })
+
+  it('should call deleteTodo when the button is clicked', () => {
+    const event = jest.fn()
+    const { enzymeWrapper, props } = setup([])
+    const deleteTodoButton = enzymeWrapper.find('button')
+
+    deleteTodoButton.simulate('click', event)
+
+    expect(props.deleteTodo).toHaveBeenCalledTimes(1)
+  })
+});

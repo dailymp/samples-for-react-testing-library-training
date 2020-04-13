@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import { deleteTodo } from '../../../redux/actions/todosActions';
+
 import * as React from 'react';
 import {TodoEntity} from '../../../model/todo';
 
@@ -26,3 +29,14 @@ export const TodoRowComponent = (props: Props) => {
      </tr>
    );
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteTodo: (id: number) => {return dispatch(deleteTodo(id))},
+  };
+}
+
+export const TodoRow = connect(
+  null,
+  mapDispatchToProps
+)(TodoRowComponent);

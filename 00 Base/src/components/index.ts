@@ -1,1 +1,1 @@
-export { TodosAreaContainer } from './todoList/TodosAreaContainer';
+export { TodosContainer } from './todoList/todosContainer';

@@ -8,12 +8,8 @@ export const todoReducer =  (state : todoState = [], action) => {
     case actionsEnums.TODO_REQUEST_COMPLETED:
     case actionsEnums.ADD_REQUEST_COMPLETED:
     case actionsEnums.DELETE_REQUEST_COMPLETED:
-      return handleActionCompleted(state, action.payload);
+      return action.payload;
+    default:
+      return state
   }
-
-  return state;
 };
-
-const handleActionCompleted = (state : todoState, todos) => {
-  return todos;
-}
