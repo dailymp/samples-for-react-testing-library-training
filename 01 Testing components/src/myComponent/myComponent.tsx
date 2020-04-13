@@ -20,7 +20,6 @@ import { RootState } from '../store/contact/index';
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
   const dispatch = useDispatch();
-  console.log(contacts)
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
