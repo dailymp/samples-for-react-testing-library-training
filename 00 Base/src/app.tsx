@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { MessagesSection } from './components';
+import { MyComponent } from './components/myComponent';
+import './styles.less';
 
-export const App: React.FunctionComponent = props => (
+export const App: React.FunctionComponent = (props) => (
   <div>
-    <MessagesSection />
+    <MyComponent nameFromProps="Fruit User" />
   </div>
 );
