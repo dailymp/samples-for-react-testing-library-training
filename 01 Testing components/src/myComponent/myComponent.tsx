@@ -20,6 +20,7 @@ import { RootState } from '../store/contact/index';
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
   const dispatch = useDispatch();
+  console.log(contacts)
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -41,7 +42,7 @@ export const MyComponent: FC<any> = () => {
   const handleChange = (contact: ContactType) => {
     setLoading(true);
     updateContact(contact)
-      .then(() => dispatch(contactUpdate(contact)))
+      .then((u) => dispatch(contactUpdate(u.data)))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   };
