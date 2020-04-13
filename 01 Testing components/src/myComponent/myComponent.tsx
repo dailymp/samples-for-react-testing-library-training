@@ -14,13 +14,8 @@ import {
   contactDelete,
 } from '../store/contact/actions';
 import { MyContact, MyAddContact, MyLoading } from '../myComponent';
-import {
-  ContactActionTypes,
-  Contact as ContactType,
-} from '../store/contact/types';
+import { Contact as ContactType } from '../store/contact/types';
 import { RootState } from '../store/contact/index';
-
-
 
 export const MyComponent: FC<any> = () => {
   const contacts = useSelector((state: RootState) => state.contactReducer);
@@ -30,7 +25,7 @@ export const MyComponent: FC<any> = () => {
   const [error, setError] = useState(false);
 
   // useEffect loads all contacts.
-  React.useEffect(()  => {
+  React.useEffect(() => {
     setLoading(true);
     getContactList()
       .then((u) => dispatch(loadAllContacts(u.data)))
@@ -73,25 +68,29 @@ export const MyComponent: FC<any> = () => {
         <h1 className="container-title" data-testid="component-label">
           My Contacts
         </h1>
-        <div className="table-responsive" >
+        <div className="table-responsive">
           <table className="table">
             <thead>
               <tr>
-                <th scope="col" data-test="app-label" >Full Name</th>
+                <th scope="col" data-test="app-label">
+                  Full Name
+                </th>
                 <th scope="col">Email</th>
               </tr>
             </thead>
             <tbody>
-              {contacts.length > 0 ? contacts.map((contact: ContactType) => {
-                return (
-                  <MyContact
-                    key={contact.id}
-                    onChange={handleChange}
-                    onDelete={handleDelete}
-                    contact={contact}
-                  />
-                );
-              }): <h1 data-testid="component-no-contacts">No contacts...</h1>}
+              {contacts.length > 0
+                ? contacts.map((contact: ContactType) => {
+                    return (
+                      <MyContact
+                        key={contact.id}
+                        onChange={handleChange}
+                        onDelete={handleDelete}
+                        contact={contact}
+                      />
+                    );
+                  })
+                : null}
             </tbody>
           </table>
         </div>

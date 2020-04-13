@@ -12,7 +12,6 @@ import { MyComponent } from './myComponent';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import * as myApi from '../myApi';
-
 jest.mock('axios');
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -32,7 +31,6 @@ const setUp = (initialState = {}) => {
 
 describe('<MyComponent />', () => {
   let wrapper;
-  let error: true;
   beforeEach(() => {
     const initialState = [];
     wrapper = setUp(initialState);
@@ -72,5 +70,53 @@ describe('<MyComponent />', () => {
     const labelElementEmail = getByTestId('contact-label-email');
     expect(labelElementName.textContent).toEqual('aga');
     expect(labelElementEmail.textContent).toEqual('aga@op.com');
+  });
+
+  it('Diplay Properly when addContact "', () => {
+    const { getByTestId } = render(wrapper);
+    const inputElementName = getByTestId('add-input-name') as HTMLInputElement;
+
+    const inputElementEmail = getByTestId(
+      'add-input-email'
+    ) as HTMLInputElement;
+
+    const buttonElementAdd = getByTestId('add-button-add') as HTMLButtonElement;
+    fireEvent.change(inputElementName, { target: { value: 'John' } });
+    fireEvent.change(inputElementEmail, {
+      target: { value: 'John@gmail.com' },
+    });
+    buttonElementAdd.click();
+    expect(buttonElementAdd).not.toBeNull();
+  });
+
+  it('Diplay properly when onDelete', () => {
+    const { getByTestId } = render(wrapper);
+    const buttonElement = getByTestId(
+      'contact-button-delete'
+    ) as HTMLButtonElement;
+    buttonElement.click();
+    expect(buttonElement).not.toBeNull();
+  });
+
+  it('Display properly children "', async () => {
+    const { getByTestId } = render(wrapper);
+
+    const buttonElementChange = getByTestId(
+      'contact-button-change'
+    ) as HTMLButtonElement;
+    buttonElementChange.click();
+
+    const inputElement = getByTestId(
+      'contact-input-change'
+    ) as HTMLInputElement;
+
+    const buttonElementSave = getByTestId(
+      'contact-button-save'
+    ) as HTMLButtonElement;
+
+    fireEvent.change(inputElement, { target: { value: 'John@gmail.com' } });
+    buttonElementSave.click();
+    expect(buttonElementChange).not.toBeNull();
+    expect(buttonElementSave).not.toBeNull();
   });
 });
