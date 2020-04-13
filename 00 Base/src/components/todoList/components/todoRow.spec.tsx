@@ -26,7 +26,7 @@ describe('TodoRow', () => {
     const todo: TodoEntity = {
         userId: 1,
         id: 1,
-        title: 'Hacer la compra',
+        title: 'Buy',
         completed: true,
     }
     

@@ -8,13 +8,13 @@ describe('todosActions', () => {
       {
           userId: 1,
           id: 1,
-          title: 'Hacer la compra',
+          title: 'Buy',
           completed: true,
       },
       {
           userId: 1,
           id: 2,
-          title: 'Ir al gimnasio',
+          title: 'Go to the gym',
           completed: false,
       }
     ]
@@ -31,13 +31,13 @@ describe('todosActions', () => {
         {
             userId: 1,
             id: 1,
-            title: 'Hacer la compra',
+            title: 'Buy',
             completed: true,
         },
         {
             userId: 1,
             id: 2,
-            title: 'Ir al gimnasio',
+            title: 'Go to the gym',
             completed: false
         }
     ]

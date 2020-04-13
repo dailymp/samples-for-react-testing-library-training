@@ -3,6 +3,12 @@ import { TodoEntity } from '../model/todo'
 
 let todos: TodoEntity[] = []
 
+// Funnctions to test the other functions
+export const setTodos = (newTodos: TodoEntity[]) => {
+  todos = newTodos
+}
+export const getTodosValue = () => todos
+
 export const getTodos = () => 
   Axios.get('https://jsonplaceholder.typicode.com/todos?userId=1')
     .then( response => {
