@@ -20,9 +20,9 @@ export const fetchPosts = () => {
   };
 };
 
-export const addPost = (name: string) => {
+export const addPost = (post: Object) => {
   return {
     type: ADD_POST,
-    payload: name,
+    payload: post,
   };
 };

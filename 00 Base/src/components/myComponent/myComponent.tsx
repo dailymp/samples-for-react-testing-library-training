@@ -47,7 +47,18 @@ export const MyComponent: React.FunctionComponent<Props> = (props) => {
               ))
             : null}
         </div>
-        <MyInputComponent addPost={(newPost) => dispatch(addPost(newPost))} />
+        <MyInputComponent
+          addPost={(newPost) =>
+            dispatch(
+              addPost({
+                id: Math.floor(Math.random() * 1000),
+                userId: 1,
+                title: newPost,
+                body:newPost,
+              })
+            )
+          }
+        />
       </div>
     </>
   );

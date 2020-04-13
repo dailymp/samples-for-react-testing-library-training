@@ -18,16 +18,10 @@ export default function (state = initialState, action) {
     }
 
     case ADD_POST: {
-      let tmpPost = {
-        id: Math.floor(Math.random() * 1000),
-        userId: 1,
-        title: action.payload,
-        body: action.payload,
-      };
 
       return {
         ...state,
-        posts: state.posts.concat([tmpPost]),
+        posts: state.posts.concat([action.payload]),
       };
     }
     default: {
