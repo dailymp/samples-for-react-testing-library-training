@@ -81,11 +81,12 @@ describe('<MyComponent />', () => {
     ) as HTMLInputElement;
 
     const buttonElementAdd = getByTestId('add-button-add') as HTMLButtonElement;
+
+    buttonElementAdd.click();
     fireEvent.change(inputElementName, { target: { value: 'John' } });
     fireEvent.change(inputElementEmail, {
       target: { value: 'John@gmail.com' },
     });
-    buttonElementAdd.click();
     expect(buttonElementAdd).not.toBeNull();
   });
 
@@ -118,5 +119,7 @@ describe('<MyComponent />', () => {
     buttonElementSave.click();
     expect(buttonElementChange).not.toBeNull();
     expect(buttonElementSave).not.toBeNull();
+
+    expect(inputElement.value).toEqual('John@gmail.com');
   });
 });

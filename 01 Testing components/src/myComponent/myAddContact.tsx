@@ -39,6 +39,7 @@ export const MyAddContact: FC<Props> = ({ onAdd }) => {
       </label>
       <button
         data-testid="add-button-add"
+        type="submit"
         className="contact-add__btn"
         onClick={handleAdd}
       >
