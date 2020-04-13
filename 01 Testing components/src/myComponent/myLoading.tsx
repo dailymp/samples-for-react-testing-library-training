@@ -9,7 +9,7 @@ export interface Props {
 export const MyLoading: FC<Props> = ({ children, hidden }) => {
   // Children are rendered when the loader is not displayed
   if (hidden === true) {
-    return children || null;
+    return children;
   }
 
   return (

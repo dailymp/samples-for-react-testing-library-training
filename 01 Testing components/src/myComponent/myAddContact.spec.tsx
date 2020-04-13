@@ -43,4 +43,5 @@ describe('MyAddContact', () => {
     expect(inputElementEmail.value).toEqual('John@gmail.com');
     expect(props.onAdd).toBeCalledTimes(1);
   });
+
 });
