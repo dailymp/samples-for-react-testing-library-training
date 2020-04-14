@@ -7,7 +7,7 @@ export default function (state = initialState, action) {
     case GET_POST_FROM_API: {
       return {
         ...state,
-        posts: action.payload.data,
+        posts: action.payload,
       };
     }
     case DELETE_POST: {
@@ -18,7 +18,6 @@ export default function (state = initialState, action) {
     }
 
     case ADD_POST: {
-
       return {
         ...state,
         posts: state.posts.concat([action.payload]),

@@ -1,4 +1,4 @@
-import { getListOfFruit } from './myApi';
+import { getListOfFruit, getPosts } from './myApi';
 
 describe('myApi tests', () => {
   it('getListOfFruit should return an array of string', () => {
@@ -12,5 +12,8 @@ describe('myApi tests', () => {
       'cherry',
       'peach',
     ]);
+  });
+  it('should fecth some post from the api', () => {
+    expect(getPosts()).rejects.toThrowError('Error fetching');
   });
 });
