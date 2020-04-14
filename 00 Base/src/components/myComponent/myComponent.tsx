@@ -1,14 +1,7 @@
 import * as React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  /*   fetchfruits,
-  deleteFruit,
-  addFruit, */
-  fetchPosts,
-  deletePost,
-  addPost,
-} from './../../redux/actions/index';
+import { fetchPosts, deletePost, addPost } from './../../redux/actions/index';
 import './styles.less';
 
 import Button from '@material-ui/core/Button';
@@ -17,6 +10,12 @@ import Chip from '@material-ui/core/Chip';
 import { MyInputComponent } from '../myInputComponent/myInputComponent';
 export interface Props {
   nameFromProps: string;
+}
+export interface Posts {
+  id: Number;
+  userId: Number;
+  title: string;
+  body: string;
 }
 
 export const MyComponent: React.FunctionComponent<Props> = (props) => {
@@ -37,11 +36,11 @@ export const MyComponent: React.FunctionComponent<Props> = (props) => {
         </Button>
         <div className="chip-container">
           {!!posts
-            ? posts.map((el /* : Object */) => (
+            ? posts.map((el: Posts) => (
                 <Chip
                   color="primary"
                   label={el.title}
-                  key={el.id}
+                  key={el.id.toString()}
                   onDelete={() => dispatch(deletePost(el.id))}
                 />
               ))
@@ -54,7 +53,7 @@ export const MyComponent: React.FunctionComponent<Props> = (props) => {
                 id: Math.floor(Math.random() * 1000),
                 userId: 1,
                 title: newPost,
-                body:newPost,
+                body: newPost,
               })
             )
           }
