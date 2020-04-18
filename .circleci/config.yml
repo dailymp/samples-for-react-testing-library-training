@@ -9,11 +9,9 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd '03 Testing redux' 
             - run: npm install
-            - run: cd '03 Testing redux' 
             - run: npm test
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
