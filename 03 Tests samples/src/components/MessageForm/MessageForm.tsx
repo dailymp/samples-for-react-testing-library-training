@@ -1,16 +1,18 @@
 import React from 'react';
+
 import { addMessage } from '../../redux/actions/MessagesActions';
 import { connect } from 'react-redux';
 import { Message } from '../../model';
 import './MessageForm.less';
+import { SelectComponent } from './SelectComponent';
 
 interface MessageFormProps {
-    messages: Message[],
-    addMessage?: (newMessage: Message) => Promise<void>,
+	messages: Message[],
+	addMessage?: (newMessage: Message) => Promise<void>,
 }
 
 interface MessageFormState {
-    newMessage: Message
+	newMessage: Message
 }
 
 export class MessageFormComponent extends React.Component<MessageFormProps, MessageFormState>{
@@ -67,6 +69,7 @@ export class MessageFormComponent extends React.Component<MessageFormProps, Mess
 					onChange={(event) => this.handleChange(event)}
 					name='subject' type="text" />
 				<label htmlFor="body">Body</label>
+	
 				<textarea
 					name="body"
 					value={newMessage.body}

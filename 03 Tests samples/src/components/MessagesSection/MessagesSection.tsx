@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getAllMessages } from '../../redux/actions/MessagesActions';
 import './MessagesSection.less';
 import { Message } from '../../model';
+import { SelectComponent } from '../MessageForm/SelectComponent';
 
 interface MessagesSectionProps {
 	getMessages: () => Promise<void>,
@@ -33,7 +34,10 @@ export class MessagesSectionComponent extends React.Component<MessagesSectionPro
 			<div className="message-section">
 				<h1>Messages management sample, deployed</h1>
 				<MessageForm messages={messages} />
+
 				<MessageList messages={messages} />
+
+				<SelectComponent />
 			</div>
 		);
 	}

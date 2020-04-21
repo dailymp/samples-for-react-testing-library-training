@@ -3,7 +3,7 @@ import './MessageList.less';
 import { Message } from '../../model';
 
 interface MessageListProps {
-    messages: Message[],
+	messages: Message[],
 }
 
 export const MessageList = (props: MessageListProps) => {

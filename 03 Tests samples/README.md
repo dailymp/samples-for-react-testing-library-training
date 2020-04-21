@@ -13,11 +13,13 @@
    - Message form test: [FormComponent](./src/components/MessageForm/MessageForm.test.tsx)
    - Message list test: [ListComponent](./src/components/MessageList/MessageList.test.tsx)
    - Message section test: [SectionComponent](./src/components/MessagesSection/MessagesSection.test.tsx)
+
+- **Custom hook useSubscribeToScrollStatus** test sample: [useSubscribeToScrollStatus](./src/customHooks/useSubscribeToScrollStatus.spec.tsx)
    
 - **Model-mappers** test sample:
 
 - Tests samples for events onChange, onScroll, etc..
-- Tests samples for useSuscribeToScroll
+
 - Tests samples using ref an useRef hook
 
 
