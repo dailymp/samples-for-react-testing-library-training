@@ -16,9 +16,14 @@
    
 - **Model-mappers** test sample:
 
-- Tests samples for events onChange, onScroll, etc..
-- Tests samples for useSuscribeToScroll
-- Tests samples using ref an useRef hook
+- Tests samples for events onChange ( simulate, fireEvent, ...) 
+- Tests samples for events onClick 
+- Tests samples for events onScroll 
+- Test samples for onMouseUp and onMouseDown
+- Test samples for onContextMenu 
+- Test samples for onSubmit
+- Tests samples for useSuscribeToScroll 
+- Tests samples using ref an useRef hook 
 
 
 
