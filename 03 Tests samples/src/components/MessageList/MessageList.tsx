@@ -7,20 +7,53 @@ interface MessageListProps {
 }
 
 export const MessageList = (props: MessageListProps) => {
-	return (<table className="messages-table">
-		<thead>
-			<tr>
-				<th>Subject</th>
-				<th>Body</th>
-			</tr>
-		</thead>
-		<tbody>
-			{props.messages.map(message => {
-				return (<tr key={message.id}>
-					<td>{message.subject}</td>
-					<td>{message.body}</td>
-				</tr>);
-			})}
-		</tbody>
-	</table>);
+	const [rowColor, setRowColor] = React.useState('white');
+	const [clickPosition, setClickPosition] = React.useState({ clientX: 0, clientY: 0 });
+	const [showContextMenu, setShowContextMenu] = React.useState(false);
+
+	const handleOnMouseDown = (event: React.MouseEvent) => {
+		event.type === "mousedown" ? setRowColor('red') : setRowColor('white');
+	};
+	
+	const handleContextMenu = (event: React.MouseEvent) => {
+    setClickPosition({ clientX: event.clientX, clientY: event.clientY });
+    event.preventDefault();
+    document.addEventListener('mousedown', handleClickAfterContextMenuOpen);
+    setShowContextMenu(true);
+	};
+	
+	const handleClickAfterContextMenuOpen = (e: MouseEvent) => {
+    // Only if the left button is clicked - number 1
+    // We need to perform this check since this method will also get called when right-clicking
+    if (e.which === 1) {
+      document.removeEventListener('mousedown', handleClickAfterContextMenuOpen);
+      setTimeout(() => setShowContextMenu(false), 200);
+    }
+  };
+
+	return (
+		<div onContextMenu={handleContextMenu} className="messages-table-container">
+			<table className="messages-table" >
+				<thead>
+					<tr>
+						<th>Subject</th>
+						<th>Body</th>
+					</tr>
+				</thead>
+				<tbody>
+					{props.messages.map(message => (
+						<tr key={message.id} onMouseDown={handleOnMouseDown} onMouseUp={handleOnMouseDown} style={{backgroundColor: rowColor}}>
+							<td>{message.subject}</td>
+							<td>{message.body}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+			{showContextMenu && (
+				<div className="context-menu-info" style={{ top: clickPosition.clientY, left: clickPosition.clientX }}>
+					{`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
+				</div>
+			)}
+		</div>
+	);
 };

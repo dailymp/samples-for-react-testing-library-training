@@ -44,4 +44,19 @@ describe('Message List component test', () => {
 		component = shallow(< MessageList messages={messages}/>);
 		expect(component.find('td')).toHaveLength(2);
 	});
+
+	it('should set color red on mouse down on the tr', () =>{
+		let messages = [
+			{
+				id: 1,
+				subject: 'Hello world',
+				body: 'Hello world'
+			}
+		];
+		component = shallow(< MessageList messages={messages}/>);
+		const bodyMessages = component.find('tr').at(1);
+		bodyMessages.simulate('mousedown');
+		console.log('aaaaaaaaaaaaaaaaaaaaaaa', component);
+		expect(bodyMessages).toContain('');
+	});
 });
