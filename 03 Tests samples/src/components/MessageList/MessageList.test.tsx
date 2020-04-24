@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 import  {MessageList} from './MessageList';
 
 describe('Message List component test', () => {
-	configure({ adapter: new Adapter() });
+  configure({ adapter: new Adapter() });
 
 	let component;
 	const setState = jest.fn();
