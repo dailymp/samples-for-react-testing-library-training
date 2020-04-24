@@ -11,9 +11,9 @@ export const MessageList = (props: MessageListProps) => {
 	const [clickPosition, setClickPosition] = React.useState({ clientX: 0, clientY: 0 });
 	const [showContextMenu, setShowContextMenu] = React.useState(false);
 
-	const handleOnMouseDown = (event: React.MouseEvent) => {
-		event.type === "mousedown" ? setRowColor('red') : setRowColor('white');
-	};
+	// const handleOnMouse = (event: React.MouseEvent) => {
+	// 	event.type === "mousedown" ? setRowColor('red') : setRowColor('blue');
+	// };
 	
 	const handleContextMenu = (event: React.MouseEvent) => {
     setClickPosition({ clientX: event.clientX, clientY: event.clientY });
@@ -27,7 +27,7 @@ export const MessageList = (props: MessageListProps) => {
     // We need to perform this check since this method will also get called when right-clicking
     if (e.which === 1) {
       document.removeEventListener('mousedown', handleClickAfterContextMenuOpen);
-      setTimeout(() => setShowContextMenu(false), 200);
+      setTimeout(() => setShowContextMenu(false), 100);
     }
   };
 
@@ -40,9 +40,13 @@ export const MessageList = (props: MessageListProps) => {
 						<th>Body</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody>{console.log('return', rowColor)}
 					{props.messages.map(message => (
-						<tr key={message.id} onMouseDown={handleOnMouseDown} onMouseUp={handleOnMouseDown} style={{backgroundColor: rowColor}}>
+						<tr 
+							key={message.id} 
+							onMouseDown={() => setRowColor('red')} 
+							onMouseUp={() => setRowColor('blue')} 
+							style={{backgroundColor: rowColor}}>
 							<td>{message.subject}</td>
 							<td>{message.body}</td>
 						</tr>
@@ -51,6 +55,7 @@ export const MessageList = (props: MessageListProps) => {
 			</table>
 			{showContextMenu && (
 				<div className="context-menu-info" style={{ top: clickPosition.clientY, left: clickPosition.clientX }}>
+					Context menu
 					{`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
 				</div>
 			)}

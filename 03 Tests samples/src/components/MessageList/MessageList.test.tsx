@@ -1,17 +1,24 @@
 import * as React from 'react';
-import  { shallow }  from 'enzyme';
+import  { shallow, mount }  from 'enzyme';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { act } from 'react-dom/test-utils';
 import  {MessageList} from './MessageList';
 
 describe('Message List component test', () => {
 	configure({ adapter: new Adapter() });
 
 	let component;
+	const setState = jest.fn();
+	const useStateMock: any = (init) => [init, setState];
     
 	beforeEach(() => {
 		component = shallow(< MessageList messages={[]}/>);
 	});
+
+	afterEach(() => {
+    jest.clearAllMocks();
+  });
 
 	it('should render a table', () =>{
 		expect(component.find('table')).toHaveLength(1);
@@ -45,7 +52,8 @@ describe('Message List component test', () => {
 		expect(component.find('td')).toHaveLength(2);
 	});
 
-	it('should set color red on mouse down on the tr', () =>{
+	it('should set color red on mouse down on the tr', () => {
+		jest.spyOn(React, 'useState').mockImplementation(useStateMock);
 		let messages = [
 			{
 				id: 1,
@@ -54,9 +62,9 @@ describe('Message List component test', () => {
 			}
 		];
 		component = shallow(< MessageList messages={messages}/>);
-		const bodyMessages = component.find('tr').at(1);
-		bodyMessages.simulate('mousedown');
-		console.log('aaaaaaaaaaaaaaaaaaaaaaa', component);
-		expect(bodyMessages).toContain('');
+		// const bodyMessages = component.find('tr').at(1);
+		// bodyMessages.simulate('mousedown', { type: "mousedown" });
+		expect(setState).toHaveBeenCalledTimes(1);
+		// expect(bodyMessages.props().style).toHaveProperty('backgroundColor', 'blue');
 	});
 });
