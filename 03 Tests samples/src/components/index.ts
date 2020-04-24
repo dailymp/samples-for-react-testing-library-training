@@ -5,8 +5,8 @@ import {NameForm} from './NameForm/NameForm';
 
 
 export {
-	MessageList,
-	MessageForm,
-	MessagesSection,
-	NameForm,
+  MessageList,
+  MessageForm,
+  MessagesSection,
+  NameForm,
 };
