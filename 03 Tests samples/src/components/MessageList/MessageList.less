@@ -2,28 +2,37 @@
 @headerBackgroundColor: gainsboro;
 @evenTrBackgroundColor:  #ffe8e8;
 @oddTrBackgroundColor: white;
-
-.messages-table{
-    border: @tableBorder;
-    width: 80%;
-    border-collapse: collapse;
-    td, th {
+div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .messages-table{
         border: @tableBorder;
-    };
-    thead{
-        tr{
-            background-color: @headerBackgroundColor;
-            text-align: left;
+        width: 80%;
+        border-collapse: collapse;
+        td, th {
+            border: @tableBorder;
+        };
+        thead{
+            tr{
+                background-color: @headerBackgroundColor;
+                text-align: left;
+            }
+        }
+        tbody{
+            tr{
+                &:nth-child(even){
+                    background-color: @evenTrBackgroundColor;
+                }
+                &:nth-child(odd){
+                    background-color: @oddTrBackgroundColor;
+                }
+            }
         }
     }
-    tbody{
-        tr{
-            &:nth-child(even){
-                background-color: @evenTrBackgroundColor;
-            }
-            &:nth-child(odd){
-                background-color: @oddTrBackgroundColor;
-            }
-        }
+    button {
+        width: 20%;
+        background-color: black;
+        color: white;
     }
 };

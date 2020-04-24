@@ -21,7 +21,7 @@
 - Tests samples for events onScroll (Daily)
 - Test samples for onMouseUp and onMouseDown (Regina)
 - Test samples for onContextMenu (Regina)
-- Test samples for onSubmit (Aurora)
+- Test samples for onSubmit [onSubmitTest](./src/components/NameForm/NameForm.test.tsx)
 
 - Tests samples for useSuscribeToScroll (Daily)
 - Tests samples using ref an useRef hook (Regina, Daily)
