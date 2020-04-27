@@ -7,7 +7,6 @@ interface MessageListProps {
 }
 
 export const MessageList = (props: MessageListProps) => {
-<<<<<<< HEAD
 	const [rowColor, setRowColor] = React.useState('white');
 	const [clickPosition, setClickPosition] = React.useState({ clientX: 0, clientY: 0 });
 	const [showContextMenu, setShowContextMenu] = React.useState(false);
@@ -56,28 +55,12 @@ export const MessageList = (props: MessageListProps) => {
 			</table>
 			{showContextMenu && (
 				<div className="context-menu-info" style={{ top: clickPosition.clientY, left: clickPosition.clientX }}>
-					Context menu
-					{`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
+						<div>
+						Context menu
+						{`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
+					</div>
 				</div>
 			)}
 		</div>
 	);
-=======
-  return (<table className="messages-table">
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Body</th>
-      </tr>
-    </thead>
-    <tbody>
-      {props.messages.map(message => {
-        return (<tr key={message.id}>
-          <td>{message.subject}</td>
-          <td>{message.body}</td>
-        </tr>);
-      })}
-    </tbody>
-  </table>);
->>>>>>> 72da5827271a3a5c4ed610ce3f8c0aeb66b2b37c
 };
