@@ -56,7 +56,7 @@ describe('Message List component test', () => {
     bodyMessages.simulate('mousedown', { type: 'mousedown' });
     expect(window.alert).toBeCalledWith('mousedown');
   });
-  
+
   it('should alert mouseup on mouse up on the tr', () => {
     jest.spyOn(window, 'alert').mockImplementation(() => {});
     component = shallow(<MessageList messages={messages} />);
