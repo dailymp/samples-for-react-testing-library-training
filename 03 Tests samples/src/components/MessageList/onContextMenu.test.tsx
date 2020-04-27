@@ -22,6 +22,7 @@ describe('Message List component test', () => {
     component.find('div').at(0).simulate('contextMenu', { clientX: 969, clientY: 140, preventDefault });
     expect(component.find('.context-menu-info')).toHaveLength(1);
   });
+  // This test passes due to the setTimeout function, we should work over this.
   it('should close context menu', () => {
     const preventDefault = jest.fn();
     component.find('div').at(0).simulate('contextMenu', { clientX: 969, clientY: 140, preventDefault });
