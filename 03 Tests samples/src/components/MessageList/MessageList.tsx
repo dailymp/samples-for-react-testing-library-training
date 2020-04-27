@@ -7,9 +7,11 @@ interface MessageListProps {
 }
 
 export const MessageList = (props: MessageListProps) => {
-	// const [rowColor, setRowColor] = React.useState('white');
-	const [clickPosition, setClickPosition] = React.useState({ clientX: 0, clientY: 0 });
-	const [showContextMenu, setShowContextMenu] = React.useState(false);
+  const [clickPosition, setClickPosition] = React.useState({
+    clientX: 0,
+    clientY: 0,
+  });
+  const [showContextMenu, setShowContextMenu] = React.useState(false);
 
   const handleOnMouse = (event: React.MouseEvent) => {
     event.type === 'mousedown' ? alert('mousedown') : alert('mouseup');
@@ -34,36 +36,39 @@ export const MessageList = (props: MessageListProps) => {
     }
   };
 
-	return (
-		<div onContextMenu={handleContextMenu} className="messages-table-container">
-			<table className="messages-table" >
-				<thead>
-					<tr>
-						<th>Subject</th>
-						<th>Body</th>
-					</tr>
-				</thead>
-				<tbody>
-					{props.messages.map(message => (
-						<tr
-							key={message.id}
-							onMouseDown={handleOnMouse}
-							onMouseUp={handleOnMouse}
-					  	>
-							<td>{message.subject}</td>
-							<td>{message.body}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
-			{showContextMenu && (
-				<div className="context-menu-info" style={{ top: clickPosition.clientY, left: clickPosition.clientX }}>
-						<div>
-						Context menu
-						{`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
-					</div>
-				</div>
-			)}
-		</div>
-	);
+  return (
+    <div onContextMenu={handleContextMenu} className="messages-table-container">
+      <table className="messages-table">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.messages.map((message) => (
+            <tr
+              key={message.id}
+              onMouseDown={handleOnMouse}
+              onMouseUp={handleOnMouse}
+            >
+              <td>{message.subject}</td>
+              <td>{message.body}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {showContextMenu && (
+        <div
+          className="context-menu-info"
+          style={{ top: clickPosition.clientY, left: clickPosition.clientX }}
+        >
+          <div>
+            Context menu
+            {`Top position:${clickPosition.clientY}  left-position:${clickPosition.clientX}`}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
