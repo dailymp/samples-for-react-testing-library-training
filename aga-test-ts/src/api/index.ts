@@ -3,4 +3,4 @@ export {
   updateContact,
   deleteContact,
   addContact,
-} from './myContactApi';
+} from "./contact";

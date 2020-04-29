@@ -1,100 +1,125 @@
 import * as React from 'react';
-// import { render, cleanup } from '@testing-library/react';
-import { render, fireEvent, waitForElement, act, RenderResult } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitForElement,
+  act,
+  RenderResult,
+} from '@testing-library/react';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { MyComponent } from './myComponent';
+import { shallow } from 'enzyme';
+import configureStore from 'redux-mock-store';
 import * as myApi from '../myApi';
-import { MyComponent, Props } from './myComponent';
+jest.mock('axios');
 
-jest.mock('./myFruits.tsx', () => ({
-  MyFruits: () => <div />,
+Enzyme.configure({ adapter: new Adapter() });
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => {},
+  useSelector: () => [{ id: '1', name: 'aga', email: 'aga@op.com' }],
 }));
 
-const baseProps: Props = {
-  nameFromProps: null,
-}
+const setUp = (initialState = {}) => {
+  const store = configureStore(initialState);
+  const wrapper = shallow(<MyComponent store={store} />)
+    .childAt(0)
+    .dive();
+  return wrapper as any;
+};
 
-//afterEach(cleanup);
-
-describe('My component', () => {
-  let props: Props;
+describe('<MyComponent />', () => {
+  let wrapper;
   beforeEach(() => {
-    props = {...baseProps};
+    const initialState = [];
+    wrapper = setUp(initialState);
   });
 
-  it('should display the title provided', () => {
-    // Arrange
-    const name = 'Title';
-
-    // Act
-    const { getByText } = render(<MyComponent nameFromProps={name} />);
-
-    // Assert
-    const element = getByText('Hello Title!');
-    expect(element).not.toBeNull();
-    expect(element.tagName).toEqual('H1');
+  it('Expect to not log errors in console', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    expect(wrapper.length).not.toBeNull();
+    expect(spy).not.toHaveBeenCalled();
   });
 
-  // it('should display the person name using snapshot testing', () => {
-  //   // Arrange
-  //   const name = 'Fruity';
+  it('Shows buttons', () => {
+    const { getByTestId } = render(wrapper);
+    const deleteElement = getByTestId(
+      'contact-button-delete'
+    ) as HTMLButtonElement;
+    expect(deleteElement).not.toBeNull();
 
-  //   // Act
-  //   const { asFragment } = render(<MyComponent nameFromProps={name} />);
+    const addElement = getByTestId('add-button-add') as HTMLButtonElement;
+    expect(addElement).not.toBeNull();
 
-  //   // Assert
-  //   expect(asFragment()).toMatchSnapshot();
-  // });
-
-  it('should display a label and input elements with empty userName value', () => {
-    // Arrange
-
-    // Act
-    const { getByTestId, getAllByText } = render(<MyComponent {...props} />);
-    // const xxlabelElement = getByText(''); // https://testing-library.com/docs/dom-testing-library/api-queries
-    const elementsWithEmptyText = getAllByText('');
-    const labelElement = getByTestId('userName-label');
-    const inputElement = getByTestId('userName-input') as HTMLInputElement;
-
-    // Assert
-    expect(labelElement.textContent).toEqual('');
-    expect(inputElement.value).toEqual('');
+    const changeElement = getByTestId(
+      'contact-button-change'
+    ) as HTMLButtonElement;
+    expect(changeElement).not.toBeNull();
   });
 
-  it('should update username label when the input changes', () => {
-    // Arrange
-    // Act
-    const { getByTestId } = render(<MyComponent {...props} />);
-
-    const labelElement = getByTestId('userName-label');
-    const inputElement = getByTestId('userName-input') as HTMLInputElement;
-
-    fireEvent.change(inputElement, { target: { value: 'John' } });
-
-    // Assert
-    expect(labelElement.textContent).toEqual('John');
-    expect(inputElement.value).toEqual('John');
+  it('Renders loading', () => {
+    const { getByTestId } = render(<MyComponent />);
+    const labelElement = getByTestId('loading-label');
+    expect(labelElement.textContent).toEqual('Loading...');
   });
 
-  xit('should display the list of fruits after resolving the api call on initialization', async () => {
-    // Arrange
-    const getListOfFruitMock = jest
-      .spyOn(myApi, 'getListOfFruit')
-      .mockResolvedValue(['Melon', 'Apple', 'Pear']);
+  it('Renders contacts list', () => {
+    const { getByTestId } = render(wrapper);
+    const labelElementName = getByTestId('contact-label-name');
+    const labelElementEmail = getByTestId('contact-label-email');
+    expect(labelElementName.textContent).toEqual('aga');
+    expect(labelElementEmail.textContent).toEqual('aga@op.com');
+  });
 
-    // Act
-    let wrapper: RenderResult = null;
-    await act(async() => {
-      wrapper = render(<MyComponent {...props} />);
+  it('Diplay Properly when addContact "', () => {
+    const { getByTestId } = render(wrapper);
+    const inputElementName = getByTestId('add-input-name') as HTMLInputElement;
+
+    const inputElementEmail = getByTestId(
+      'add-input-email'
+    ) as HTMLInputElement;
+
+    const buttonElementAdd = getByTestId('add-button-add') as HTMLButtonElement;
+
+    buttonElementAdd.click();
+    fireEvent.change(inputElementName, { target: { value: 'John' } });
+    fireEvent.change(inputElementEmail, {
+      target: { value: 'John@gmail.com' },
     });
-    const {getByText} = wrapper;
-    await waitForElement(() => getByText('Melon'));
-    const melonElement = getByText('Melon');
-    const appleElement = getByText('Apple');
-    const pearElement = getByText('Pear');
+    expect(buttonElementAdd).not.toBeNull();
+  });
 
-    // Assert
-    expect(getListOfFruitMock).toHaveBeenCalled();
-    expect(melonElement).not.toBeUndefined();
-    expect(appleElement).not.toBeUndefined();
-    expect(pearElement).not.toBeUndefined();
+  it('Diplay properly when onDelete', () => {
+    const { getByTestId } = render(wrapper);
+    const buttonElement = getByTestId(
+      'contact-button-delete'
+    ) as HTMLButtonElement;
+    buttonElement.click();
+    expect(buttonElement).not.toBeNull();
+  });
+
+  it('Display properly children "', async () => {
+    const { getByTestId } = render(wrapper);
+
+    const buttonElementChange = getByTestId(
+      'contact-button-change'
+    ) as HTMLButtonElement;
+    buttonElementChange.click();
+
+    const inputElement = getByTestId(
+      'contact-input-change'
+    ) as HTMLInputElement;
+
+    const buttonElementSave = getByTestId(
+      'contact-button-save'
+    ) as HTMLButtonElement;
+
+    fireEvent.change(inputElement, { target: { value: 'John@gmail.com' } });
+    buttonElementSave.click();
+    expect(buttonElementChange).not.toBeNull();
+    expect(buttonElementSave).not.toBeNull();
+
+    expect(inputElement.value).toEqual('John@gmail.com');
   });
 });
