@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Message } from '../../model';
 import './MessageForm.less';
 
+
 interface MessageFormProps {
     messages: Message[],
     addMessage?: (newMessage: Message) => Promise<void>,

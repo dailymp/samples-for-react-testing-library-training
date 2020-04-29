@@ -4,6 +4,7 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import  { MessagesSectionComponent } from './MessagesSection';
+import { Button } from '../Button/Button';
 
 
 describe('Message List component test', () => {
@@ -27,5 +28,11 @@ describe('Message List component test', () => {
   it('should getMessages be called in ComponentDidMound', () =>{
     expect(getMessagesSpy.calledOnce).toBe(true);
   });
-
+  it('should handle the click event', () =>{
+    window.alert = jest.fn();
+    expect(typeof component.find(Button).at(0).prop('onClickButton')).toBe('function');
+    component.find(Button).at(0).prop('onClickButton')(); 
+    expect(window.alert).toHaveBeenCalledTimes(1);
+  });
+  
 });
