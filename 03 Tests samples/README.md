@@ -21,7 +21,7 @@
 - Tests samples for events onScroll 
 - Test samples for onMouseUp and onMouseDown
 - Test samples for onContextMenu 
-- Test samples for onSubmit
+- Test samples for onSubmit [onSubmitTest](./src/components/NameForm/NameForm.test.tsx)
 - Tests samples for useSuscribeToScroll 
 - Tests samples using ref an useRef hook 
 

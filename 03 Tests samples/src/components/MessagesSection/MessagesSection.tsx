@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageForm, MessageList } from '../index';
+import { MessageForm, MessageList, NameForm } from '../index';
 import { connect } from 'react-redux';
 import { getAllMessages } from '../../redux/actions/MessagesActions';
 import './MessagesSection.less';
@@ -36,6 +36,7 @@ export class MessagesSectionComponent extends React.Component<
         <h1>Messages management sample, deployed</h1>
         <MessageForm messages={messages} />
         <MessageList messages={messages} />
+        <NameForm />
       </div>
     );
   }

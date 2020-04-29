@@ -5,7 +5,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import  { MessagesSectionComponent } from './MessagesSection';
 
-
 describe('Message List component test', () => {
   configure({ adapter: new Adapter() });
 
