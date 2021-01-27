@@ -1,1 +1,1 @@
-export { getListOfFruit } from './myApi';
+export { getListOfTodos, addToTodoList, deleteFromTodoList } from './myApi';

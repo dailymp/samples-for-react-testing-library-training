@@ -12,9 +12,7 @@ module.exports = merge(
       extensions: ['.js', '.ts', '.tsx'],
     },
     entry: {
-      app: ['./index.tsx',
-        './content/styles.css',
-      ],
+      app: ['./index.tsx', './content/styles.css'],
     },
     module: {
       rules: [

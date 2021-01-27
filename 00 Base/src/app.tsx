@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { MyComponent } from './myComponent';
+import { TodosContainer } from './components';
 
-export const App: React.FunctionComponent = props => (
+export const App: React.FunctionComponent = () => (
   <div>
-    <MyComponent nameFromProps="Fruit User" />
+    <TodosContainer/>
   </div>
 );
