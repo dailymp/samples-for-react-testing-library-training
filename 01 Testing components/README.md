@@ -205,11 +205,11 @@ Since we want to trigger the `change` event, we simply need to call the `fireEve
 
 ## Running asynchronous calls and unit tests
 
-Now let us modify our component so that it performs a call against an API to retrieve some data after initialization. This is a side effect and can be implemented using a `useEffect` hook. We will also import the `getListOfFruit` method from `myApi` folder, which simulates an async call to retrieve a list of pieces of fruit. 
+Now let us modify our component so that it performs a call against an API to retrieve some data after initialization. This is a side effect and can be implemented using a `useEffect` hook. We will also import the `getListOfFruit` method from `myFruitApi` folder, which simulates an async call to retrieve a list of pieces of fruit. 
 
 ```diff
 import * as React from 'react';
-+import { getListOfFruit }  from '../myApi';
++import { getListOfFruit }  from '../myFruitApi';
 
 export interface Props {
   nameFromProps: string;
@@ -250,13 +250,13 @@ So now our component will always perform a (fake) fetch call on initialization, 
 import * as React from 'react';
 -import { render, fireEvent } from '@testing-library/react';
 +import { render, fireEvent, waitForElement } from '@testing-library/react';
-+import * as myApi from '../myApi';
++import * as myFruitApi from '../myFruitApi';
 import { MyComponent, Props } from './myComponent';
 ...
 +  it('should display the list of fruits after resolving the api call on initialization', async () => {
 +    // Arrange
 +    const getListOfFruitMock = jest
-+      .spyOn(myApi, 'getListOfFruit')
++      .spyOn(myFruitApi, 'getListOfFruit')
 +      .mockResolvedValue(['Melon', 'Apple', 'Pear']);
 +
 +    // Act
@@ -282,13 +282,13 @@ However, if we run the code (and we are using React 16.8.6 or lower), we will se
 import * as React from 'react';
 -import { render, fireEvent, waitForElement } from '@testing-library/react';
 +import { render, fireEvent, waitForElement, act, RenderResult } from '@testing-library/react';
-import * as myApi from '../myApi';
+import * as myFruitApi from '../myFruitApi';
 import { MyComponent, Props } from './myComponent';
 ...
   it('should display the list of fruits after resolving the api call on initialization', async () => {
     // Arrange
     const getListOfFruitMock = jest
-      .spyOn(myApi, 'getListOfFruit')
+      .spyOn(myFruitApi, 'getListOfFruit')
       .mockResolvedValue(['Melon', 'Apple', 'Pear']);
 
     // Act
@@ -315,7 +315,7 @@ This fixes the issue with this test. Technically, the other tests also share the
 
 ```diff
 import * as React from 'react';
--import { getListOfFruit }  from '../myApi';
+-import { getListOfFruit }  from '../myFruitApi';
 +import { MyFruits } from './myFruits';
 
 export interface Props {
@@ -355,7 +355,7 @@ export const MyComponent: React.FunctionComponent<Props> = props => {
 And the code for our new `MyFruits` component can be found below
 ```javascript
 import * as React from 'react';
-import { getListOfFruit }  from '../myApi';
+import { getListOfFruit }  from '../myFruitApi';
 
 export const MyFruits = (props) => {
   const [fruits, setFruits] = React.useState([]);
@@ -384,7 +384,7 @@ The first thing we are going to do is disable the last test we coded as it does 
 - it('should display the list of fruits after resolving the api call on initialization', async () => {
     // Arrange
     const getListOfFruitMock = jest
-      .spyOn(myApi, 'getListOfFruit')
+      .spyOn(myFruitApi, 'getListOfFruit')
       .mockResolvedValue(['Melon', 'Apple', 'Pear']);
 
     // Act
@@ -395,7 +395,7 @@ And now, in order to mock our component, let us just mock the whole module that 
 ```diff
 import * as React from 'react';
 import { render, fireEvent, waitForElement, act, RenderResult } from '@testing-library/react';
-import * as myApi from '../myApi';
+import * as myFruitApi from '../myFruitApi';
 import { MyComponent, Props } from './myComponent';
 
 +jest.mock('./myFruits.tsx', () => ({
